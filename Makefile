@@ -14,9 +14,13 @@ all: reports
 autopkgtest.db:
 	wget $(DB_URL)
 
-reports: arch-speed.report i386-false-passes.report pass-analysis.report
+reports: arch-speed.report pass-analysis.report # i386-false-passes.report
 
 %.report: %.sql autopkgtest.db
 	sqlite3 autopkgtest.db < $< 2>&1 | tee $@
 
-.PHONY: reports
+clean:
+	rm *.report
+
+.PHONY: clean reports
+

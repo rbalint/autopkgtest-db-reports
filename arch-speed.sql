@@ -25,3 +25,10 @@ JOIN (SELECT test_id, AVG(duration) as d, version
 JOIN current_version c ON c.version = r.version AND c.package = t.package AND c.release = t.release
 WHERE t.release = 'groovy'
 GROUP BY t.arch;
+
+SELECT 'Total time spent running tests (in hours, per architecture, in Groovy):';
+SELECT t.arch, printf("%,d",ROUND(SUM(r.duration)/3600))
+FROM test t
+JOIN result r ON r.test_id = t.id
+WHERE t.release = 'groovy'
+GROUP BY t.arch;

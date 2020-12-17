@@ -12,7 +12,7 @@ endif
 all: reports
 
 autopkgtest.db:
-	wget $(DB_URL)
+	wget -q $(DB_URL)
 
 reports: arch-speed.report pass-analysis.report package-stats.report # i386-false-passes.report
 
